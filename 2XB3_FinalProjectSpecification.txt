@@ -1,0 +1,26 @@
+StormWare Design Specifications
+-------------------------------
+
+- Parse datasets
+	- Array of elements
+	- Each element:
+		- Location (Lat, Long)
+		- Magnitude
+		- Type (earthquake, tornado, etc.)
+		- Start Date (Year, Month, Day, Time)
+		- End Date (Year, Month, Day, Time)
+
+- Data processing
+	- Maching learning?
+		- Standard Neural Network
+			- Maps location and type to magnitude
+			- Trained using parsed elements
+			- Input layer is latitude, longitude, type
+			- Output layer is magnitude, frequency
+	- Algorithm for calculating frequency?
+		- 
+	- Weighted average?
+		- Gaussian distribusion?
+
+- Map rendering
+	- Google Maps API
