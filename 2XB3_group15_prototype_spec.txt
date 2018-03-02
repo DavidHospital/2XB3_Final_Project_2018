@@ -1,0 +1,26 @@
+Prototype Design Specifications
+-------------------------------
+
+-Display
+
+-DisasterEvent: object
+	-type: string
+	-location: LatLong	
+		-latitude
+		-longitude
+	-time: Date
+	-magnitude: float
+
+	-getters and setters
+
+-Data: static
+	uses DisasterEvent
+	
+	-HashMap<type: string, list of DisasterEvent>
+	-function: void AddData(DisasterEvent)	
+
+-Parser: static
+	uses data
+
+	-function: void ParseCSV(fileName: string)
+	
