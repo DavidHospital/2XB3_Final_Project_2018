@@ -1,4 +1,4 @@
-package group15.a2xb3.stormware;
+//package group15.a2xb3.stormware;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,5 +25,9 @@ public class Data {
         }
         data.get(disasterEvent.getType()).add(disasterEvent);
     }
-
+	
+	public static ArrayList<DisasterEvent> getList(String type) {
+		return data.get(type);
+	}
+	
 }
