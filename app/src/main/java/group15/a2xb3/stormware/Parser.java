@@ -55,8 +55,8 @@ public class Parser {
 					counter ++;
 				}
 				
-				Date d = new Date();
-				DisasterEvent de = new DisasterEvent(type, new LatLng((lat1 + lat2) / 2, (lng1 + lng2) / 2), d, magnitude);
+				DisasterEvent de = new DisasterEvent(type, new LatLng((lat1 + lat2) / 2, (lng1 + lng2) / 2), year, month, day, magnitude);
+				Data.add(de);
 			}
 			
 			br.close();
