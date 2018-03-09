@@ -1,12 +1,18 @@
-//package group15.a2xb3.stormware;
+package group15.a2xb3.stormware;//package group15.a2xb3.stormware;
 
 /**
  * Created by David on 2018-03-05.
  */
+import android.provider.ContactsContract;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.StringTokenizer;
 import java.io.IOException;
+
+import group15.a2xb3.stormware.DisasterEvent;
 
 public class Parser {
   public static void parseCSV(final String fileName) {
@@ -65,8 +71,8 @@ public class Parser {
 					counter ++;
 				}
 				
+
 				DisasterEvent de = new DisasterEvent(type, new LatLng((lat1 + lat2) / 2, (lng1 + lng2) / 2), year, month, day, magnitude);
-				Data.add(de);
 			}
 			
 			br.close();

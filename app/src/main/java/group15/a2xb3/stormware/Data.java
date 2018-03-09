@@ -1,7 +1,9 @@
-//package group15.a2xb3.stormware;
+package group15.a2xb3.stormware;//package group15.a2xb3.stormware;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import group15.a2xb3.stormware.DisasterEvent;
 
 /**
  * Created by David on 2018-03-05.
