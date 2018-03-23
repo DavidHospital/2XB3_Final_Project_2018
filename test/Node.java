@@ -1,3 +1,5 @@
+package test;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ public class Node {
 	
 	public Node(int x, int y) {
 		events = new ArrayList<DisasterEvent>();
+		weights = new HashMap<>();
 		this.x = x;
 		this.y = y;
 	}
@@ -45,8 +48,9 @@ public class Node {
 	
 	public void render(Graphics g) {
 		for (Node n : weights.keySet()) {
-			g.setColor(Color.getHSBColor(1.0f, 1.0f, 1.0f));
-			g.drawLine(this.x, this.y, n.x, n.y);
+			System.out.printf("%d, %d, %d, %d\n", x, y, n.x, n.y);
+			g.setColor(Color.BLACK);
+			g.drawLine(this.x, 600 - this.y, n.x, 600 - n.y);
 		}
 	}
 }

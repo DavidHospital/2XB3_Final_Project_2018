@@ -1,3 +1,5 @@
+package test;
+
 import java.awt.Graphics;
 
 
@@ -13,6 +15,11 @@ public class Graph {
 	
 	public Graph(int width, int height) {
 		nodes = new Node[width][height];
+		for (int i = 0; i < nodes.length; i ++) {
+			for (int j = 0; j < nodes[0].length; j ++) {
+				nodes[i][j] = new Node(i, j);
+			}
+		}
 	}
 	
 	public void addEvent(DisasterEvent e) {
@@ -33,8 +40,8 @@ public class Graph {
 		double lat = location.getLat();
 		double lng = location.getLng();
 		
-		int x = (int)((lng - X_START) / X_RANGE);
-		int y = (int)((lat - Y_START) / Y_RANGE);
+		int x = (int)((lng - X_START) / X_RANGE * nodes.length);
+		int y = (int)((lat - Y_START) / Y_RANGE * nodes[0].length);
 		
 		if (x >= 0 && x < nodes.length) {
 			if (y >= 0 && y < nodes[0].length) {

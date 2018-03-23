@@ -1,8 +1,9 @@
+package test;
+
+import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JPanel;
-
-public class Game extends JPanel{
+public class Game {
 	
 	
 	private int width, height;			
@@ -16,22 +17,11 @@ public class Game extends JPanel{
 		
 		graph = new Graph(800, 600);
 		
-		Parser.parseCSV("test.csv", graph);
-		
-		repaint ();														
+		Parser.parseCSV("test.csv", graph);						
 	}
 	
-	@Override
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	public void paintComponent (Graphics g) {
-		super.paintComponent(g);
-		
+	public void render(Graphics g) { 
 		graph.render(g);
-		//recall this method
-		repaint ();
 	}
 	
 	public int getWidth() {

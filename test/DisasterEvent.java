@@ -1,3 +1,5 @@
+package test;
+
 public class DisasterEvent implements Comparable {
 
     private final String type;

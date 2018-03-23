@@ -1,3 +1,5 @@
+package test;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,9 +14,12 @@ public class Parser {
 
           int c = 0;
           String line = br.readLine();    // Ignore first line (table header)
+          
+          outerloop:
           while ((line = br.readLine()) != null) {
 
               String[] tokens = line.split(",");
+
               String type = null;
               double lat1 = 0;
               double lng1 = 0;
@@ -25,8 +30,8 @@ public class Parser {
               int day = 0;
 
               for (int i = 0; i < tokens.length; i++) {
-            	  if (tokens[i].charAt(0) == '\"') {
-            		  tokens[i] = tokens[i].substring(1, tokens[i].length());
+            	  if (tokens[i].length() > 0 && tokens[i].charAt(0) == '\"') {
+            		  tokens[i] = tokens[i].substring(1, tokens[i].length() - 1);
             	  }
                   switch (i) {
                       case 0:
@@ -41,21 +46,36 @@ public class Parser {
                           type = tokens[i];
                           break;
                       case 44:
+                    	  	try {
                           lat1 = Double.parseDouble(tokens[i]);
-                          break;
+                    	  	} catch (NumberFormatException e) {
+                    	  		continue outerloop;
+                    	  	}
+                    	  	break;
                       case 45:
-                          lng1 = Double.parseDouble(tokens[i]);
+                          try {
+                              lng1 = Double.parseDouble(tokens[i]);
+                        	  	} catch (NumberFormatException e) {
+                        	  		continue outerloop;
+                        	  	}
                           break;
                       case 46:
-                          lat2 = Double.parseDouble(tokens[i]);
+                          try {
+                              lat2 = Double.parseDouble(tokens[i]);
+                        	  	} catch (NumberFormatException e) {
+                        	  		continue outerloop;
+                        	  	}
                           break;
                       case 47:
-                          lng2 = Double.parseDouble(tokens[i]);
+                          try {
+                              lng2 = Double.parseDouble(tokens[i]);
+                        	  	} catch (NumberFormatException e) {
+                        	  		continue outerloop;
+                        	  	}
                           break;
                   }
 
 
-                  System.out.println(line);
                   DisasterEvent de = new DisasterEvent(type, new LatLng(lat1, lng1), new LatLng(lat2, lng2), year, month, day);
                   graph.addEvent(de);
               }
@@ -67,6 +87,9 @@ public class Parser {
       } catch (IOException e) {
           e.printStackTrace();
       }
+      
+
+      System.out.println("Parsing Complete");
   }
 
     static String next(StringTokenizer st, int c) {
