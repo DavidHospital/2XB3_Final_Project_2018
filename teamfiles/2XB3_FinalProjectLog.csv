@@ -18,5 +18,5 @@ Timestamp,Originator,Type,Task ID,Status,Comments,Supporting Document
 180302T1100,All,Task,8,Completed,Discussed prototype design and requirements,
 180305T0200,David,Task,9,Started,Created Android Studio project and commited it to this repo,
 180307T1300,All,Task,10,Completed,Discussed relevence of machine learning,
-180309T1000,All,Task,9,Continued,Continued work on Parser.java and created Test.java,src/.../Parser.java, Test.java
+180309T1000,All,Task,9,Continued,Continued work on Parser.java and created Test.java.src/.../Parser.java, Test.java
 180316T1000,All,Task,11,Completed,Discussed project objective and how much data to display at once,,
