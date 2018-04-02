@@ -1,31 +1,23 @@
-package group15.a2xb3.stormware;//package group15.a2xb3.stormware;
-
-//import com.google.android.gms.maps.model.LatLng;
-
-//import java.util.Date;
+package group15.a2xb3.stormware;
 
 import com.google.android.gms.maps.model.LatLng;
-
-/**
- * Created by David on 2018-03-05.
- */
 
 public class DisasterEvent implements Comparable {
 
     private final String type;
-    private final LatLng location;
+    private final LatLng location1;
+    private final LatLng location2;
     private final int year;
 	private final int month;
 	private final int day;
-    private final double magnitude;
 
-    public DisasterEvent(String type, LatLng location, int year, int month, int day, double magnitude) {
+    public DisasterEvent(String type, LatLng location1, LatLng location2, int year, int month, int day) {
         this.type = type;
-        this.location = location;
+        this.location1 = location1;
+        this.location2 = location2;
         this.year = year;
 		this.month = month;
 		this.day = day;
-        this.magnitude = magnitude;
     }
 
 	@Override
@@ -56,8 +48,12 @@ public class DisasterEvent implements Comparable {
         return type;
     }
 
-    public LatLng getLocation() {
-        return location;
+    public LatLng getLocation1() {
+        return location1;
+    }
+    
+    public LatLng getLocation2() {
+        return location2;
     }
 
 	public int getYear() {
@@ -71,10 +67,6 @@ public class DisasterEvent implements Comparable {
 	public int getDay() {
 		return day;
 	}
-	
-    public double getMagnitude() {
-        return magnitude;
-    }
 
 	
 //	@Override

@@ -2,6 +2,7 @@ package group15.a2xb3.stormware;//package group15.a2xb3.stormware;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import group15.a2xb3.stormware.DisasterEvent;
 
@@ -29,7 +30,11 @@ public class Data {
     }
 	
 	public static ArrayList<DisasterEvent> getList(String type) {
-		return data.get(type);
+		return data.get(type.trim().toUpperCase());
 	}
+
+	public static Set<String> getTypes() {
+        return data.keySet();
+    }
 	
 }
