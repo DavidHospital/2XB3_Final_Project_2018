@@ -13,19 +13,19 @@ android:orientation="vertical">
 
         <Button
             android:id="@+id/heatmap1"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@android:style/Widget.Button.Transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="addHeatMap"
-            android:text="Tornado"/>
+            android:text="Tornado" />
 
         <Button
             android:id="@+id/heatmap2"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@android:style/Widget.Button.Transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="addHeatMap"
-            android:text="Flash Flood"/>
+            android:text="Flash Flood" />
 
     </LinearLayout>
 
