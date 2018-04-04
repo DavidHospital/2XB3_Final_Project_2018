@@ -5,8 +5,10 @@ import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -15,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Tile;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
@@ -27,6 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private Marker mMarker;
+    private TileOverlay mOverlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Parser.parseCSV("2017.csv", this);
+        NewParser.secondParser("c2017.csv", this);
+    }
+
+    public void addHeatMap(View view) {
+        Button b = (Button) view;
+        String type = b.getText().toString();
+
+        if (mOverlay != null) {
+            mOverlay.remove();
+        }
+
+        List<DisasterEvent> deList = Data.getList(type);
+        System.out.println(deList.size());
+        List<LatLng> list = new ArrayList<>();
+        for (DisasterEvent de : deList) {
+            list.add(de.getLocation1());
+        }
+
+        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
+                .data(list)
+                .build();
+
+        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
     /**
@@ -67,7 +93,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -79,19 +104,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
+        String location = "USA";
 
-        List<DisasterEvent> deList = Data.getList(Data.getTypes().iterator().next());
-        System.out.println(deList.size());
-        List<LatLng> list = new ArrayList<>();
-        for (DisasterEvent de : deList) {
-            list.add(de.getLocation1());
+        Geocoder geocoder = new Geocoder(this);
+        try {
+            Address address = geocoder.getFromLocationName(location, 1).get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
-                .data(list)
-                .build();
-
-        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 }
