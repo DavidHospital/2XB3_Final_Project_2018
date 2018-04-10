@@ -26,12 +26,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// Main activity class deals with the view and controller parts of the Model View Controller design
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    // GoogleMap object for the view
     private GoogleMap mMap;
+
+    // Current marker, changed by using the search bar
     private Marker mMarker;
+
+    // Current heatmap overlay, changed by selecting a new type
     private TileOverlay mOverlay;
 
+    // Called when the activity is created (app startup)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,53 +48,70 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // Parse data into Data module
         NewParser.secondParser("c2017.csv", this);
     }
 
+    // Adds a heatmap when one of the buttons is pressed
     public void addHeatMap(View view) {
         Button b = (Button) view;
         String type = b.getText().toString();
 
+        // Remove previous heatmap
         if (mOverlay != null) {
             mOverlay.remove();
         }
 
+        // Get a list of all events of a given type
         List<DisasterEvent> deList = Data.getList(type);
-        System.out.println(deList.size());
+
+        // New list for only the location of those events
         List<LatLng> list = new ArrayList<>();
         for (DisasterEvent de : deList) {
             list.add(de.getLocation1());
         }
 
+        // Create a new heatmap from the list of locations
         HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
                 .data(list)
                 .build();
 
+        // Add the heatmap to the GoogleMap object
         mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
     /**
      * Implement search method for the search bar.
-     * @param view
      */
     public void onMapSearch(View view) {
+
+        // Get a location from the use via search bar
         EditText locationSearch = (EditText) findViewById(R.id.editText);
         String location = locationSearch.getText().toString();
         List<Address> addressList = null;
 
+        // If the inputted location is valid
         if (location != null || !location.equals("")) {
             Geocoder geocoder = new Geocoder(this);
             try {
+                // Get all locations returned from the search
                 addressList = geocoder.getFromLocationName(location, 1);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // Grab the first location in the address list
             Address address = addressList.get(0);
+
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+            // Remove the previous marker if there is one
             if (mMarker != null) {
                 mMarker.remove();
             }
+
+            // Add a new marker to the map at the given location and add it to the GoogleMap object
             mMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(address.getAddressLine(0)));
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }
@@ -105,9 +129,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        // Create the map
         mMap = googleMap;
-        String location = "USA";
 
+        // Start it off focused in USA
+        String location = "USA";
         Geocoder geocoder = new Geocoder(this);
         try {
             Address address = geocoder.getFromLocationName(location, 1).get(0);

@@ -2,6 +2,10 @@ package group15.a2xb3.stormware;
 
 import com.google.android.gms.maps.model.LatLng;
 
+/*
+Class for DisasterEvent objects.
+Stores start and end location, time, and type for a single event
+ */
 public class DisasterEvent implements Comparable {
 
     private final String type;
@@ -11,6 +15,8 @@ public class DisasterEvent implements Comparable {
 	private final int month;
 	private final int day;
 
+
+	// Basic constructor
     public DisasterEvent(String type, LatLng location1, LatLng location2, int year, int month, int day) {
         this.type = type;
         this.location1 = location1;
@@ -20,6 +26,7 @@ public class DisasterEvent implements Comparable {
 		this.day = day;
     }
 
+    // Compare by year (currently unused)
 	@Override
 	public int compareTo(Object o) {
 		DisasterEvent other = (DisasterEvent) o;
@@ -43,7 +50,11 @@ public class DisasterEvent implements Comparable {
 			}
 		}
 	}
-	
+
+	/*
+	Getters
+	 */
+
     public String getType() {
         return type;
     }
@@ -69,8 +80,8 @@ public class DisasterEvent implements Comparable {
 	}
 
 	
-//	@Override
-//	public String toString() {
-//		return String.format("Type: %s, Lat: %.2f, Lng: %.2f, Year: %d, Month %d, Day %d", type, location.getLat(), location.getLng(), year, month, day);
-//	}
+	@Override
+	public String toString() {
+		return String.format("Type: %s, Lat: %.2f, Lng: %.2f, Year: %d, Month %d, Day %d", type, getLocation1().latitude, getLocation1().longitude, year, month, day);
+	}
 }

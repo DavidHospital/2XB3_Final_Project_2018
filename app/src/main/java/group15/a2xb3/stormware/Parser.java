@@ -11,7 +11,12 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.io.IOException;
 
+/*
 
+OLD PARSER MODULE.
+NOT USED.
+
+ */
 public class Parser {
   public static void parseCSV(final String fileName, Context mContext) {
       try {
