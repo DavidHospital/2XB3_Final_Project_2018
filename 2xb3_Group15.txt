@@ -1,0 +1,9 @@
+COMP SCI 2XB3
+
+Chen, Zijing	    400020376	Designer
+Hospital, David	    400015029	Developer
+Verma, Anirudh	    400039737	Owner
+Zhou, Sijie	        400038163	Quality Assurance
+
+The work being submitted by us is our own group work.
+

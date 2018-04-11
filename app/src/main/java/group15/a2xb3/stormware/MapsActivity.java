@@ -1,5 +1,6 @@
 package group15.a2xb3.stormware;
 
+import android.app.ActionBar;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +28,7 @@ import com.google.maps.android.heatmaps.HeatmapTileProvider;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 // Main activity class deals with the view and controller parts of the Model View Controller design
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -50,6 +54,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Parse data into Data module
         NewParser.secondParser("c2017.csv", this);
+
+        LinearLayout ll = (LinearLayout) findViewById(R.id.hsvll);
+        Set<String> types = Data.getTypes();
+
+        for (String s : types) {
+            Button b = new Button(this);
+            b.setText(s);
+
+            b.setOnClickListener(new View.OnClickListener() {
+                                    @Override public void onClick(View v) {
+                                        addHeatMap(v);
+                                    }
+                                });
+
+            ll.addView(b);
+        }
     }
 
     // Adds a heatmap when one of the buttons is pressed
