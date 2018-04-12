@@ -1,0 +1,17 @@
+EVALUATION: 
+
+Overview: 
+In this document we have presented a full report on the work undertaken to design and build the application in response to all the requirements of the stakeholders, and to the specification and plan provided in the brief. 
+
+The application is an Android mobile program using Google Map API which will help user to have an overall view of natural disasters in America. Users can choose one exact disaster type and the output will show by the form of heatmap.
+Problems faced and Improvements: 
+
+1. Parser: The parser that we had implemented initially was creating performance issues (it took 22 seconds) and we decided to implement a second parser which allowed for faster processing by 80%. It reduced the loading time to 8 seconds. 
+2. Search Bar: For our interface, we decided to implement a search bar which allowed users to search locations and disaster events by type. Following that, the team felt that the user interface needed more functionality, for which we added a horizontal scroll view listing disaster types that can be directly selected to output the heat map, instead of typing the type. We decided to keep the search bar as it allows users to select locations on map as a normal search bar does. 
+
+Review Questions:
+
+1. Does it meet the design need or situation? Yes, the design needs for the project have been met.(Tests?)
+2. Does it fit the purpose for which it is intended? Yes, as per our initial planning, we have been able to make a project which covers the needs of our intended user base. 
+
+Concluding Remarks: The team felt that if time and skill set permitted, we would have gone ahead with integrating machine learning in our project to employ neural networks for processing patterns of disaster events that we are currently displaying in our app. 
